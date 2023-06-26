@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 latent_dim = 4
 # Laden des gespeicherten Modells
-autoencoder = load_model('/Users/huyduc/Documents/GitHub/Packaging Lab/mein_autoencoder2.h5')
+autoencoder = load_model('/Users/huyduc/Documents/GitHub/Data Augmentation/mein_autoencoder2.h5')
 
 #num_features = 3486
 #input_shape = (num_features,)
@@ -28,7 +28,7 @@ autoencoder = load_model('/Users/huyduc/Documents/GitHub/Packaging Lab/mein_auto
 # Use the sampling function to create a layer that samples from the latent space
 #z = Lambda(sampling)([z_mean, z_log_var])
 # Define the decoder network
-decoder = load_model('/Users/huyduc/Documents/GitHub/Packaging Lab/mein_decoder2.h5')
+decoder = load_model('/Users/huyduc/Documents/GitHub/Data Augmentation/mein_decoder2.h5')
 #decoder_inputs = Input(shape=(latent_dim,))
 #x = Dense(64, activation='relu')(decoder_inputs)
 #outputs = Dense(num_features, activation='sigmoid')(x)
@@ -41,7 +41,7 @@ decoder = load_model('/Users/huyduc/Documents/GitHub/Packaging Lab/mein_decoder2
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 import pickle
-with open('/Users/huyduc/Documents/GitHub/Packaging Lab/scaler.pkl', 'rb') as f:
+with open('/Users/huyduc/Documents/GitHub/Data Augmentation/scaler.pkl', 'rb') as f:
     scaler = pickle.load(f)
 
 
@@ -52,7 +52,7 @@ latent_samples = np.random.normal(size=(n_samples, latent_dim))
 arr_abs = np.absolute(latent_samples)
 generated_data = decoder.predict(latent_samples)
 
-spalten = pd.read_csv("/Users/huyduc/Documents/GitHub/Packaging Lab/kadoh32_1.csv")
+spalten = pd.read_csv("/Users/huyduc/Documents/GitHub/Data Augmentation/kadoh32_1.csv")
 
 
 generierte_daten = pd.DataFrame(generated_data, columns=spalten.columns)
