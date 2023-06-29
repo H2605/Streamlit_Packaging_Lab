@@ -28,7 +28,7 @@ autoencoder = load_model('/Users/huyduc/Documents/GitHub/Data Augmentation/mein_
 # Use the sampling function to create a layer that samples from the latent space
 #z = Lambda(sampling)([z_mean, z_log_var])
 # Define the decoder network
-decoder = load_model('/Users/huyduc/Documents/GitHub/Data Augmentation/mein_decoder2.h5')
+#decoder = load_model('/Users/huyduc/Documents/GitHub/Data Augmentation/mein_decoder2.h5')
 #decoder_inputs = Input(shape=(latent_dim,))
 #x = Dense(64, activation='relu')(decoder_inputs)
 #outputs = Dense(num_features, activation='sigmoid')(x)
@@ -41,36 +41,36 @@ decoder = load_model('/Users/huyduc/Documents/GitHub/Data Augmentation/mein_deco
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 import pickle
-with open('/Users/huyduc/Documents/GitHub/Data Augmentation/scaler.pkl', 'rb') as f:
-    scaler = pickle.load(f)
+#with open('/Users/huyduc/Documents/GitHub/Data Augmentation/scaler.pkl', 'rb') as f:
+#    scaler = pickle.load(f)
 
 
-number = st.number_input('Wie Dateneinträge sollen generiert werden?', min_value=1, max_value=100000, value=1, step=1, format=None, key=None)
+#number = st.number_input('Wie Dateneinträge sollen generiert werden?', min_value=1, max_value=100000, value=1, step=1, format=None, key=None)
 #st.write('The current number is ', number)
-n_samples = number
-latent_samples = np.random.normal(size=(n_samples, latent_dim))
-arr_abs = np.absolute(latent_samples)
-generated_data = decoder.predict(latent_samples)
+#n_samples = number
+#latent_samples = np.random.normal(size=(n_samples, latent_dim))
+#arr_abs = np.absolute(latent_samples)
+#generated_data = decoder.predict(latent_samples)
 
-spalten = pd.read_csv("/Users/huyduc/Documents/GitHub/Data Augmentation/kadoh32_1.csv")
+#spalten = pd.read_csv("/Users/huyduc/Documents/GitHub/Data Augmentation/kadoh32_1.csv")
+
+#
+#generierte_daten = pd.DataFrame(generated_data, columns=spalten.columns)
 
 
-generierte_daten = pd.DataFrame(generated_data, columns=spalten.columns)
-
-
-scaler_df=scaler.inverse_transform(generierte_daten)
+#scaler_df=scaler.inverse_transform(generierte_daten)
 #generierte_daten[num_cols]=scaler_df
-generierte_daten = pd.DataFrame(scaler_df, columns=spalten.columns)
+#generierte_daten = pd.DataFrame(scaler_df, columns=spalten.columns)
 
-num_cols=generierte_daten.iloc[:, -4:-1].columns
-cat_cols=generierte_daten.iloc[:, :-4].columns
-generierte_daten[num_cols]=np.where(generierte_daten[num_cols]<0.01,0,generierte_daten[num_cols])
-generierte_daten[cat_cols]=np.where(generierte_daten[cat_cols]<1,0,1)
-generierte_daten["Transportschaden"]=np.where(generierte_daten["Transportschaden"]<0.01,0,generierte_daten["Transportschaden"])
-generierte_daten
+#num_cols=generierte_daten.iloc[:, -4:-1].columns
+#cat_cols=generierte_daten.iloc[:, :-4].columns
+#generierte_daten[num_cols]=np.where(generierte_daten[num_cols]<0.01,0,generierte_daten[num_cols])
+#generierte_daten[cat_cols]=np.where(generierte_daten[cat_cols]<1,0,1)
+#generierte_daten["Transportschaden"]=np.where(generierte_daten["Transportschaden"]<0.01,0,generierte_daten["Transportschaden"])
+#generierte_daten
 #generierte_daten["Transportschaden"].hist()
-fig, ax = plt.subplots()
-ax.hist(generierte_daten["Transportschaden"], bins=20)
+#fig, ax = plt.subplots()
+#ax.hist(generierte_daten["Transportschaden"], bins=20)
 
-st.write('Verteilung der Transportschäden')
-st.pyplot(fig)
+#st.write('Verteilung der Transportschäden')
+#st.pyplot(fig)
