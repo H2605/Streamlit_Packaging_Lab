@@ -12,6 +12,12 @@ import matplotlib.pyplot as plt
 latent_dim = 4
 # Laden des gespeicherten Modells
 autoencoder = load_model('/Users/huyduc/Documents/GitHub/Data Augmentation/mein_autoencoder2.h5')
+uploaded_file = st.file_uploader("Choose a file")
+if uploaded_file is not None:
+    # To read file as bytes:
+    # Can be used wherever a "file-like" object is accepted:
+    dataframe = pd.read_csv(uploaded_file)
+    st.write(dataframe)
 
 #num_features = 3486
 #input_shape = (num_features,)
@@ -28,7 +34,7 @@ autoencoder = load_model('/Users/huyduc/Documents/GitHub/Data Augmentation/mein_
 # Use the sampling function to create a layer that samples from the latent space
 #z = Lambda(sampling)([z_mean, z_log_var])
 # Define the decoder network
-#decoder = load_model('/Users/huyduc/Documents/GitHub/Data Augmentation/mein_decoder2.h5')
+#decoder = load_model('/Users/huyduc/Documents/GitHub/Streamlit_Packaging_Lab/scaler.pkl')
 #decoder_inputs = Input(shape=(latent_dim,))
 #x = Dense(64, activation='relu')(decoder_inputs)
 #outputs = Dense(num_features, activation='sigmoid')(x)
@@ -38,9 +44,9 @@ autoencoder = load_model('/Users/huyduc/Documents/GitHub/Data Augmentation/mein_
 #decoder = Model(decoder_inputs, outputs, name='decoder')
 #outputs = decoder(encoder(inputs)[2])
 
-import numpy as np
-from sklearn.preprocessing import MinMaxScaler
-import pickle
+#import numpy as np
+#from sklearn.preprocessing import MinMaxScaler
+#import pickle
 #with open('/Users/huyduc/Documents/GitHub/Data Augmentation/scaler.pkl', 'rb') as f:
 #    scaler = pickle.load(f)
 
@@ -51,6 +57,7 @@ import pickle
 #latent_samples = np.random.normal(size=(n_samples, latent_dim))
 #arr_abs = np.absolute(latent_samples)
 #generated_data = decoder.predict(latent_samples)
+
 
 #spalten = pd.read_csv("/Users/huyduc/Documents/GitHub/Data Augmentation/kadoh32_1.csv")
 
@@ -72,5 +79,5 @@ import pickle
 #fig, ax = plt.subplots()
 #ax.hist(generierte_daten["Transportschaden"], bins=20)
 
-#st.write('Verteilung der Transportschäden')
+#st.write('Verteilung der Daten mit ihrer Wahrscheinlichkeit auf Transportschäden')
 #st.pyplot(fig)
